@@ -26,7 +26,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauPxp(double a[3], double b[3], double axb[3])
-function iauPxp(a::Array{<:Real, 1}, b::Array{<:Real, 1})
+function iauPxp(a::AbstractVector{<:Real}, b::AbstractVector{<:Real})
    # Preallocate return values
    axb = zeros(Float64, 3)
 
@@ -36,5 +36,5 @@ function iauPxp(a::Array{<:Real, 1}, b::Array{<:Real, 1})
           convert(Array{Float64, 1}, b),
           axb)
 
-   return convert(Array{Float64, 1}, axb)
+   return SVector{3}(axb)
 end

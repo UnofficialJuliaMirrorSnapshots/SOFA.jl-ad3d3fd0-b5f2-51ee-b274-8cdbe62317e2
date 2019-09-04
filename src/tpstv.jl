@@ -67,7 +67,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # void iauTpstv(double xi, double eta, double v0[3], double v[3])
 
-function iauTpstv(xi::Real, eta::Real, v0::Array{<:Real, 1})
+function iauTpstv(xi::Real, eta::Real, v0::AbstractVector{<:Real})
    v = zeros(Float64, 3)
 
    ccall((:iauTpstv, libsofa_c), Cvoid, 
@@ -78,5 +78,5 @@ function iauTpstv(xi::Real, eta::Real, v0::Array{<:Real, 1})
        convert(Array{Float64, 1}, v0),
        v)
 
-   return v
+   return SVector{3}(v)
 end

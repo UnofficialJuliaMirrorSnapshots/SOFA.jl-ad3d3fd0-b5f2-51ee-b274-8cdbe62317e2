@@ -37,7 +37,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauPvxpv(double a[2][3], double b[2][3], double axb[2][3])
-function iauPvxpv(a::Array{<:Real, 2}, b::Array{<:Real, 2})
+function iauPvxpv(a::AbstractMatrix{<:Real}, b::AbstractMatrix{<:Real})
    # Preallocate return values
    axb = zeros(Float64, 3, 2)
 
@@ -47,5 +47,5 @@ function iauPvxpv(a::Array{<:Real, 2}, b::Array{<:Real, 2})
           convert(Array{Float64, 2}, b'),
           axb)
 
-   return convert(Array{Float64, 2}, axb')
+   return SMatrix{2,3}(axb')
 end

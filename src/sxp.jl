@@ -26,7 +26,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # void iauSxp(double s, double p[3], double sp[3])
 
-function iauSxp(s::Real, p::Array{<:Real, 1})
+function iauSxp(s::Real, p::AbstractVector{<:Real})
    sp = zeros(Float64, 3)
 
    ccall((:iauSxp, libsofa_c), Cvoid, 
@@ -35,5 +35,5 @@ function iauSxp(s::Real, p::Array{<:Real, 1})
        convert(Array{Float64, 1}, p),
        sp)
 
-   return sp
+   return SVector{3}(sp)
 end

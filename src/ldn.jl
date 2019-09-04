@@ -87,7 +87,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 #             double sn[3])
 
 function iauLdn(n::Real, b::Array{iauLDBODY, 1}, 
-               ob::Array{<:Real, 1}, sc::Array{<:Real, 1})
+               ob::AbstractVector{<:Real}, sc::AbstractVector{<:Real})
    ref_b = Ref{iauLDBODY}(b[1])
    sn    = zeros(Float64, 3)
 
@@ -99,5 +99,5 @@ function iauLdn(n::Real, b::Array{iauLDBODY, 1},
           convert(Array{Float64, 1}, ob),  convert(Array{Float64, 1}, sc),
           sn)
 
-   return sn
+   return SVector{3}(sn)
 end

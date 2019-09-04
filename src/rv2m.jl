@@ -33,12 +33,12 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauRv2m(double w[3], double r[3][3])
-function iauRv2m(w::Array{<:Real, 1})
+function iauRv2m(w::AbstractVector{<:Real})
    r = zeros(Float64, 3, 3)
 
    ccall((:iauRv2m, libsofa_c), Cvoid, 
          (Ptr{Cdouble}, Ptr{Cdouble}),
           w, r)
 
-   return convert(Array{Float64, 2}, r')
+   return SMatrix{3,3}(r')
 end

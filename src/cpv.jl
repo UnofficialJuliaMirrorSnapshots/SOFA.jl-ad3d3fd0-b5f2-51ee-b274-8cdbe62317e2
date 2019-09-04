@@ -25,7 +25,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # void iauCpv(double pv[2][3], double c[2][3])
 
-function iauCpv(pv::Array{<:Real, 2})
+function iauCpv(pv::AbstractMatrix{<:Real})
 
    # Allocate return value
    c = zeros(Float64, 3, 2)
@@ -34,5 +34,5 @@ function iauCpv(pv::Array{<:Real, 2})
          (Ptr{Cdouble}, Ptr{Cdouble}), 
          convert(Array{Float64, 2}, pv'), c)
 
-   return convert(Array{Float64,2}, c')
+   return SMatrix{2,3}(c')
 end

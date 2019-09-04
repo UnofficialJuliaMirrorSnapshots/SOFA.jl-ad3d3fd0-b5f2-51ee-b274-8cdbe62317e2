@@ -79,7 +79,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 # void iauC2ibpn(double date1, double date2, double rbpn[3][3],
 #                double rc2i[3][3])
 
-function iauC2ibpn(date1::Real, date2::Real, rbpn::Array{<:Real, 2})
+function iauC2ibpn(date1::Real, date2::Real, rbpn::AbstractMatrix{<:Real})
 
    # Allocate return value
    rc2i = zeros(Float64, 3, 3)
@@ -90,5 +90,5 @@ function iauC2ibpn(date1::Real, date2::Real, rbpn::Array{<:Real, 2})
          convert(Float64, date1), convert(Float64, date2), convert(Array{Float64, 2}, rbpn'),
          rc2i)
 
-   return convert(Array{Float64,2}, rc2i')
+   return SMatrix{3,3}(rc2i')
 end

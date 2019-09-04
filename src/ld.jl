@@ -76,8 +76,8 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 # void iauLd(double bm, double p[3], double q[3], double e[3],
 #            double em, double dlim, double p1[3])
 
-function iauLd(rh::Real, p::Array{<:Real, 1}, q::Array{<:Real, 1},
-               e::Array{<:Real, 1}, em::Real, dlim::Real)
+function iauLd(rh::Real, p::AbstractVector{<:Real}, q::AbstractVector{<:Real},
+               e::AbstractVector{<:Real}, em::Real, dlim::Real)
    p1 = zeros(Float64, 3)
 
    ccall((:iauLd, libsofa_c), Cvoid, 
@@ -87,5 +87,5 @@ function iauLd(rh::Real, p::Array{<:Real, 1}, q::Array{<:Real, 1},
           convert(Array{Float64, 1}, q), convert(Array{Float64, 1}, e),
           convert(Float64, em), convert(Float64, dlim), p1)
 
-   return p1
+   return SVector{3}(p1)
 end

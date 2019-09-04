@@ -37,7 +37,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # void iauRm2v(double r[3][3], double w[3])
 
-function iauRm2v(r::Array{<:Real, 2})
+function iauRm2v(r::AbstractMatrix{<:Real})
    w = zeros(Float64, 3)
 
    ccall((:iauRm2v, libsofa_c), Cvoid, 
@@ -45,5 +45,5 @@ function iauRm2v(r::Array{<:Real, 2})
           convert(Array{Float64, 2}, r'),
           w)
 
-   return w
+   return SVector{3}(w)
 end

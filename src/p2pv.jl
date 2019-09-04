@@ -25,7 +25,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauP2pv(double p[3], double pv[2][3])
-function iauP2pv(p::Array{<:Real, 1})
+function iauP2pv(p::AbstractVector{<:Real})
    pv = zeros(Float64, 3, 2)
 
    ccall((:iauP2pv, libsofa_c), Cvoid, 
@@ -33,5 +33,5 @@ function iauP2pv(p::Array{<:Real, 1})
        convert(Array{Float64, 1}, p),
        pv)
 
-   return convert(Array{Float64, 2}, pv')
+   return SMatrix{2,3}(pv')
 end

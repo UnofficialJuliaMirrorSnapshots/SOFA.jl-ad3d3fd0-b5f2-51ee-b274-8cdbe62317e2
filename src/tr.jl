@@ -28,7 +28,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # void iauTr(double r[3][3], double rt[3][3])
 
-function iauTr(r::Array{<:Real, 2})
+function iauTr(r::AbstractMatrix{<:Real})
    rt = zeros(Float64, 3, 3)
 
    ccall((:iauTr, libsofa_c), Cvoid, 
@@ -36,5 +36,5 @@ function iauTr(r::Array{<:Real, 2})
        convert(Array{Float64, 2}, r'),
        rt)
 
-   return convert(Array{Float64, 2}, rt')
+   return SMatrix{3,3}(rt')
 end

@@ -29,7 +29,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
 
 # void iauPvmpv(double a[2][3], double b[2][3], double amb[2][3])
-function iauPvmpv(a::Array{<:Real, 2}, b::Array{<:Real, 2})
+function iauPvmpv(a::AbstractMatrix{<:Real}, b::AbstractMatrix{<:Real})
    # Preallocate return values
    amb = zeros(Float64, 3, 2)
 
@@ -39,5 +39,5 @@ function iauPvmpv(a::Array{<:Real, 2}, b::Array{<:Real, 2})
           convert(Array{Float64, 2}, b'),
           amb)
 
-   return convert(Array{Float64, 2}, amb')
+   return SMatrix{2,3}(amb')
 end

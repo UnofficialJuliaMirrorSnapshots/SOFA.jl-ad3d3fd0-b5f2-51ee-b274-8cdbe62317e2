@@ -49,7 +49,7 @@ SOFA release 2018-01-30
 
 Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 """
-function iauAb(pnat::Array{<:Real, 1}, v::Array{<:Real, 1}, s::Real, bm1::Float64)
+function iauAb(pnat::AbstractVector{<:Real}, v::AbstractVector{<:Real}, s::Real, bm1::Float64)
    ppr = zeros(Float64, 3)
 
    ccall((:iauAb, libsofa_c), Cvoid, 
@@ -59,5 +59,5 @@ function iauAb(pnat::Array{<:Real, 1}, v::Array{<:Real, 1}, s::Real, bm1::Float6
          convert(Float64, s), 
          convert(Float64, bm1), ppr)
 
-   return ppr
+   return SVector{3}(ppr)
 end

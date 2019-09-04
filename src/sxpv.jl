@@ -29,7 +29,7 @@ Copyright (C) 2018 IAU SOFA Board.  See notes at end.
 
 # void iauSxpv(double s, double pv[2][3], double spv[2][3])
 
-function iauSxpv(s::Real, pv::Array{<:Real, 2})
+function iauSxpv(s::Real, pv::AbstractMatrix{<:Real})
    spv = zeros(Float64, 3, 2)
 
    ccall((:iauSxpv, libsofa_c), Cvoid, 
@@ -38,5 +38,5 @@ function iauSxpv(s::Real, pv::Array{<:Real, 2})
        convert(Array{Float64, 2}, pv'),
        spv)
 
-   return convert(Array{Float64, 2}, spv')
+   return SMatrix{2,3}(spv')
 end
